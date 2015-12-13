@@ -1,0 +1,74 @@
+<head>
+  <title>simple-rss</title>
+</head>
+
+<body>
+  <div id="layout" class="content pure-g">
+
+    {{> sources}}
+    {{> stream}}
+  </div>
+</body>
+
+<template name="newFeedSource">
+
+    <form class="pure-form newFeedSource">
+  <input class="pure-input-rounded" placeholder="Full RSS URL" name="url" required>
+  <button type="submit" class="primary-button pure-button">Add Source</button>
+</form>
+
+</template>
+
+<template name="sources">
+  <div id="nav" class="pure-u">
+    <a href="#" class="nav-menu-button">Feed Sources</a>
+    <div class="nav-inner">
+      {{> newFeedSource}}
+      <div class="pure-menu">
+        <ul class="pure-menu-list">
+          {{#each sources}}
+          {{> source}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="source">
+
+  <li class="pure-menu-item">
+    <a href="#" class="pure-menu-link source-link" id="{{_id}}">
+      {{title}}
+      <span class="email-count">(2)</span>
+    </a>
+    <form class="remove-source">
+      <input type="hidden" name="id" value="{{_id}}" />
+      <button type="submit">X</button>
+    </form>
+  </li>
+</template>
+
+<template name="stream">
+  <div id="list" class="pure-u-1">
+    {{#each feeds}}
+    <div class="email-item email-item-unread pure-g">
+      <div class="pure-u">
+      </div>
+      {{> feed}}
+    </div>
+    {{/each}}
+  </div>
+</template>
+
+<template name="feed">
+
+  <div class="pure-u-3-4">
+    <h5 class="email-name">{{author}}</h5>
+    <h4 class="email-subject"><a href="{{link}}" target="_blank">{{title}}</a></h4>
+    <p class="email-desc">
+      {{description}}
+    </p>
+  </div>
+
+</template>
